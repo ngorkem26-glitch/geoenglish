@@ -1,0 +1,33 @@
+{
+  "lessons": [
+    {
+      "topic": "Present Simple: I study geography",
+      "level": "A1",
+      "title": "Present Simple: I Study Geography",
+      "description": "Geniş zamanı coğrafya örnekleriyle öğren.",
+      "seo_title": "Present Simple İngilizce Dersi | GeoEnglish",
+      "seo_description": "A1 İngilizce geniş zamanı coğrafya cümleleri, kelimeler ve mini test ile öğren.",
+      "explanation": "Present Simple (geniş zaman) alışkanlıkları ve genel gerçekleri anlatır. I/you/we/they ile fiilin yalın hâli, he/she/it ile çoğunlukla -s eki kullanılır. Olumsuz cümlede do not (don't) veya does not (doesn't) kullanılır.",
+      "content_html": "<h2>Present Simple nedir?</h2><p>Geniş zaman düzenli yaptığımız işleri ve genel gerçekleri anlatır.</p><h3>Olumlu cümle</h3><p><strong>I study geography.</strong> Coğrafya çalışırım.</p><p><strong>She studies geography.</strong> O, coğrafya çalışır.</p><h3>Olumsuz cümle</h3><p><strong>I do not study at night.</strong> Geceleri ders çalışmam.</p><p><strong>He does not study at night.</strong> O, geceleri ders çalışmaz.</p><h3>Soru</h3><p><strong>Do you study geography?</strong> Coğrafya çalışır mısın?</p><p><strong>Does she read maps?</strong> O, harita okur mu?</p><h3>Unutma</h3><p>He/she/it ile olumlu cümlede fiil çoğunlukla -s/-es alır. Does kullanılan soru ve olumsuz cümlede ana fiil yalın hâldedir.</p>",
+      "vocabulary": [
+        {"english": "geography", "turkish": "coğrafya"},
+        {"english": "study", "turkish": "ders çalışmak"},
+        {"english": "map", "turkish": "harita"},
+        {"english": "read", "turkish": "okumak"},
+        {"english": "river", "turkish": "nehir"},
+        {"english": "climate", "turkish": "iklim"}
+      ],
+      "examples": [
+        {"english": "I study geography every day.", "turkish": "Her gün coğrafya çalışırım."},
+        {"english": "She reads maps.", "turkish": "O, harita okur."},
+        {"english": "We learn about rivers.", "turkish": "Nehirler hakkında bilgi öğreniriz."},
+        {"english": "Does he study climate?", "turkish": "O, iklim çalışır mı?"}
+      ],
+      "quiz": [
+        {"question": "Doğru cümleyi seç.", "options": ["She study geography.", "She studies geography.", "She studying geography."], "correct_index": 1},
+        {"question": "'Ben harita okurum.' cümlesinin doğru çevirisi hangisi?", "options": ["I reads maps.", "I reading maps.", "I read maps."], "correct_index": 2},
+        {"question": "Doğru soruyu seç.", "options": ["Does he study climate?", "Does he studies climate?", "Do he studies climate?"], "correct_index": 0}
+      ]
+    }
+  ]
+}
