@@ -1,0 +1,44 @@
+{
+  "topics": [
+    {
+      "topic": "Present Simple: I study geography",
+      "level": "A1"
+    },
+    {
+      "topic": "There is / There are: rivers and mountains",
+      "level": "A1"
+    },
+    {
+      "topic": "Can / Cannot: reading maps",
+      "level": "A1"
+    },
+    {
+      "topic": "Past Simple: weather yesterday",
+      "level": "A2"
+    },
+    {
+      "topic": "Comparatives: mountains and valleys",
+      "level": "A2"
+    },
+    {
+      "topic": "Causes of flooding",
+      "level": "B1"
+    },
+    {
+      "topic": "Explaining research methods",
+      "level": "B1"
+    },
+    {
+      "topic": "Reading a climate abstract",
+      "level": "B2"
+    },
+    {
+      "topic": "Interpreting satellite imagery",
+      "level": "B2"
+    },
+    {
+      "topic": "Academic argumentation and limitations",
+      "level": "C1"
+    }
+  ]
+}

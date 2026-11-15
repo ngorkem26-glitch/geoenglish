@@ -1,0 +1,109 @@
+{
+  "lessons": [
+    {
+      "id": "a1-001",
+      "title": "İlk adım: I am / You are",
+      "description": "Kendini tanıt, temel İngilizce cümleleri kur.",
+      "level": "A1",
+      "category": "Genel İngilizce",
+      "topic": "to be",
+      "created_at": "2026-11-12T09:00:00+03:00",
+      "duration_minutes": 15,
+      "published": true,
+      "explanation": "I am = Ben ...im. You are = Sen ...sin. İngilizcede özne ile fiil birlikte kullanılır.",
+      "content_html": "<h2>I am / You are</h2><p><strong>I am a student.</strong> Ben öğrenciyim.</p><p><strong>You are a researcher.</strong> Sen araştırmacısın.</p><h3>Coğrafyada kullanımı</h3><p>I am interested in geography. Coğrafyayla ilgileniyorum.</p>",
+      "vocabulary": [
+        {
+          "english": "student",
+          "turkish": "öğrenci"
+        },
+        {
+          "english": "researcher",
+          "turkish": "araştırmacı"
+        },
+        {
+          "english": "geography",
+          "turkish": "coğrafya"
+        }
+      ],
+      "examples": [
+        {
+          "english": "I am a student.",
+          "turkish": "Ben öğrenciyim."
+        },
+        {
+          "english": "You are a researcher.",
+          "turkish": "Sen araştırmacısın."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "I ___ a student.",
+          "options": [
+            "are",
+            "am",
+            "is"
+          ],
+          "correct_index": 1
+        },
+        {
+          "question": "You ___ interested in geography.",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ],
+          "correct_index": 0
+        }
+      ]
+    },
+    {
+      "id": "a1-002",
+      "title": "Haritalar ve yönler",
+      "description": "Map, north, south gibi coğrafya kelimelerini öğren.",
+      "level": "A1",
+      "category": "Coğrafya İngilizcesi",
+      "topic": "maps and directions",
+      "created_at": "2026-11-11T09:00:00+03:00",
+      "duration_minutes": 15,
+      "published": true,
+      "explanation": "Map harita, north kuzey, south güney anlamına gelir.",
+      "content_html": "<h2>Maps and directions</h2><p>A <strong>map</strong> shows places. Harita yerleri gösterir.</p><h3>Yönler</h3><p>North: kuzey. South: güney.</p>",
+      "vocabulary": [
+        {
+          "english": "map",
+          "turkish": "harita"
+        },
+        {
+          "english": "north",
+          "turkish": "kuzey"
+        },
+        {
+          "english": "south",
+          "turkish": "güney"
+        }
+      ],
+      "examples": [
+        {
+          "english": "This is a map.",
+          "turkish": "Bu bir haritadır."
+        },
+        {
+          "english": "North is a direction.",
+          "turkish": "Kuzey bir yöndür."
+        }
+      ],
+      "quiz": [
+        {
+          "question": "Map ne demektir?",
+          "options": [
+            "Dağ",
+            "Harita",
+            "İklim"
+          ],
+          "correct_index": 1
+        }
+      ]
+    }
+  ]
+}
