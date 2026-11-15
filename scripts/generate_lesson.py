@@ -1,4 +1,4 @@
-"""Generate the next curriculum lesson with OpenAI; store validated JSON atomically."""
+"""Publish the next prewritten GeoEnglish lesson without paid APIs."""
 import argparse
 import hashlib
 import json
@@ -12,6 +12,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data' / 'lessons-index.json'
 CURRICULUM = ROOT / 'data' / 'curriculum.json'
+BANK = ROOT / 'data' / 'lesson-bank.json'
 LEVELS = {'A1', 'A2', 'B1', 'B2', 'C1'}
 ALLOWED_TAGS = ['h2', 'h3', 'p', 'strong', 'em', 'ul', 'ol', 'li', 'blockquote', 'br']
 
@@ -69,37 +70,27 @@ def validate(content):
     return content
 
 
-def generate(topic, level, titles):
-    from openai import OpenAI
-    client = OpenAI(api_key=os.environ['OPENAI_API_KEY'], timeout=60.0, max_retries=2)
-    prompt = f'''Produce a UNIQUE, accurate beginner-to-academic English lesson for a Turkish geography student.
-Topic: {topic}; CEFR level: {level}. Previous titles: {json.dumps(titles[-25:], ensure_ascii=False)}.
-Write clear Turkish instruction, English sentences with Turkish translations, geography examples only when suitable.
-Do not invent citations or current facts. Avoid duplicate content. Provide a natural SEO title <=70 chars and meta description <=165 chars.
-Return ONLY a JSON object with these fields:
-"title": string, "description": string, "seo_title": string, "seo_description": string,
-"explanation": plain Turkish text, "content_html": HTML fragment using ONLY h2,h3,p,strong,em,ul,ol,li,blockquote,br,
-"vocabulary": array of 5-8 objects {{"english":string,"turkish":string}},
-"examples": array of >=3 objects {{"english":string,"turkish":string}},
-"quiz": array of >=3 objects {{"question":string,"options":[3 strings],"correct_index":integer 0..2}}.
-Every quiz question must have exactly one unambiguous correct answer. No markdown fences, script, styles or attributes.'''
-    response = client.responses.create(
-        model='gpt-4o-mini',
-        instructions='Return a valid JSON object only. No markdown.',
-        input=prompt,
-        text={'format': {'type': 'json_object'}},
-        max_output_tokens=3500,
-    )
-    if not response.output_text:
-        raise ValueError('Empty API response')
-    return validate(json.loads(response.output_text))
+def load_prepared(topic, level):
+    if not BANK.exists():
+        print('No lesson bank found. Create data/lesson-bank.json before publishing.')
+        return None
+    bank = read_json(BANK)
+    entries = bank.get('lessons', [])
+    if not isinstance(entries, list):
+        raise ValueError('lesson-bank.json: lessons must be a list')
+    matches = [entry for entry in entries if entry.get('topic', '').casefold().strip() == topic.casefold().strip() and entry.get('level') == level]
+    if not matches:
+        print(f'No prepared content for {level} / {topic}; nothing published.')
+        return None
+    content = {k: v for k, v in matches[0].items() if k not in ('topic', 'level')}
+    return validate(content)
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--topic', default=None)
     parser.add_argument('--level', choices=sorted(LEVELS), default='A1')
-    parser.add_argument('--dry-run', action='store_true', help='Show next topic without API usage')
+    parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
     db = read_json(DATA)
     if not isinstance(db.get('lessons'), list):
@@ -112,21 +103,21 @@ def main():
     if not topic:
         print('Curriculum complete: no new lesson generated.')
         return
-    today = datetime.now(ZoneInfo('Europe/Istanbul'))
     digest = hashlib.sha256(f'{level}:{topic.casefold().strip()}'.encode()).hexdigest()[:12]
     lesson_id = 'geo-' + digest
-    if any(x.get('id') == lesson_id or (x.get('topic','').casefold().strip() == topic.casefold().strip() and x.get('level') == level) for x in lessons):
+    if any(x.get('id') == lesson_id or (x.get('topic', '').casefold().strip() == topic.casefold().strip() and x.get('level') == level) for x in lessons):
         print('Lesson already exists; skipped:', topic)
         return
     print(f'Next lesson: {level} / {topic}')
     if args.dry_run:
         return
-    if not os.getenv('OPENAI_API_KEY'):
-        raise RuntimeError('OPENAI_API_KEY missing. Add it as a GitHub Actions secret.')
-    content = generate(topic, level, [x.get('title', '') for x in lessons])
+    content = load_prepared(topic, level)
+    if content is None:
+        return
+    today = datetime.now(ZoneInfo('Europe/Istanbul'))
     lesson = {'id': lesson_id, 'topic': topic, 'level': level,
               'category': 'Coğrafya İngilizcesi', 'created_at': today.isoformat(timespec='seconds'),
-              'published': True, 'duration_minutes': 15, 'model': 'gpt-4o-mini', **content}
+              'published': True, 'duration_minutes': 15, 'model': 'prewritten', **content}
     db['lessons'].insert(0, lesson)
     atomic_save(DATA, db)
     print('Saved:', lesson['title'])
